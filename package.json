@@ -11,10 +11,11 @@
 	"author": "agoblinking",
 	"license": "MIT",
 	"devDependencies": {
-		"three-skeletor": "0.0.2",
+		"@rollup/plugin-node-resolve": "^9.0.0",
 		"@rollup/plugin-sucrase": "^3.1.0",
 		"rollup": "^2.26.3",
-		"rollup-plugin-terser": "^7.0.0"
+		"rollup-plugin-terser": "^7.0.0",
+		"three-skeletor": "0.0.2"
 	},
 	"peerDependencies": {
 		"aframe": "^1.0.4"

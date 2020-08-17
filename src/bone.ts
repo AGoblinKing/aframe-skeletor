@@ -6,41 +6,50 @@ import {
 	IKHelper,
 } from 'three-skeletor'
 
-AFRAME.registerComponent('bone', {
+AFRAME.registerComponent('skeletor', {
 	schema: {
+		// ball joint constraint
 		ball: {
 			type: 'number',
 			default: undefined,
 		},
 
+		// hinge joint constraint
 		hinge: {
 			type: 'number',
 			default: undefined,
 		},
 
-		cap: {},
+		// what the end of the joint chain should be affected by
+		target: {
+			type: 'selector',
+		},
 
-		core: {
+		// set as the base of a joint chain
+		root: {
 			type: 'bool',
 			default: false,
 		},
 
+		// shows debug visuals around joints
 		debug: {
 			type: 'bool',
 			default: true,
 		},
 	},
 	update() {
-		if (!this.data.cap) return
+		if (!this.data.target) return
 
+		// TODO: no timeout,
+		// need to figure out how to wait for parent to be ready
 		setTimeout(() => {
 			this.ik = new IK()
 			this.chain = new IKChain()
 
 			let el = this.el
-			const path = [this.data.cap, el]
+			const path = [this.data.target, el]
 			// we go up
-			while (!el.components.bone.data.core) {
+			while (!el.components.bone.data.root) {
 				el = el.parentNode
 				path.push(el)
 			}
@@ -64,7 +73,7 @@ AFRAME.registerComponent('bone', {
 				})
 
 				this.chain.add(last_joint, {
-					target: i === 0 ? this.data.cap.object3D : null,
+					target: i === 0 ? this.data.target.object3D : null,
 				})
 			}
 
@@ -95,13 +104,12 @@ AFRAME.registerComponent('bone', {
 			this.el.object3D.remove(this.ik)
 
 			if (this.data.debug) {
-				// dumb
+				// TODO: better way of
 				setTimeout(() => {
 					this.el.sceneEl.object3D.remove(this.helper)
 					delete this.helper
 				}, 500)
 			}
-			return
 		}
 	},
 })

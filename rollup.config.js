@@ -1,5 +1,6 @@
 import { terser } from 'rollup-plugin-terser'
 import sucrase from '@rollup/plugin-sucrase'
+import resolve from '@rollup/plugin-node-resolve'
 import pkg from './package.json'
 
 const browser_config = {
@@ -19,6 +20,10 @@ const browser_config = {
 		sucrase({
 			exclude: ['node_modules/**'],
 			transforms: ['typescript'],
+		}),
+
+		resolve({
+			extensions: ['.js', '.ts'],
 		}),
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
