@@ -3,6 +3,27 @@ import sucrase from '@rollup/plugin-sucrase'
 import resolve from '@rollup/plugin-node-resolve'
 import pkg from './package.json'
 
+const config = {
+	input: `src/index.ts`,
+	external: ['three', 'aframe'],
+	output: [
+		{
+			format: 'cjs',
+			file: pkg.main,
+		},
+		{
+			format: 'es',
+			file: pkg.module,
+		},
+	],
+	plugins: [
+		sucrase({
+			exclude: ['node_modules/**'],
+			transforms: ['typescript'],
+		}),
+	],
+}
+
 const browser_config = {
 	input: `src/index.ts`,
 	external: ['three', 'aframe'],
@@ -31,4 +52,4 @@ const browser_config = {
 	],
 }
 
-export default [browser_config]
+export default [browser_config, config]

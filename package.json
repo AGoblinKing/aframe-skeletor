@@ -1,8 +1,9 @@
 {
 	"name": "aframe-skeletor",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Inverse Kinematics for AFRAME",
-	"main": "dst/aframe-skeleton.umd.js",
+	"main": "dst/aframe-skeletor.cjs.js",
+	"module": "dst/aframe-skeletor.es.js",
 	"browser": "dst/aframe-skeleton.umd.js",
 	"scripts": {
 		"dev": "rollup -c -w",
@@ -25,6 +26,7 @@
 		"three-skeletor": "0.0.3"
 	},
 	"peerDependencies": {
-		"aframe": "^1.0.4"
+		"aframe": "^1.0.4",
+		"three": "^0.119.1"
 	}
 }

@@ -1,1 +1,1 @@
-import './bone'
+import './skeletor'

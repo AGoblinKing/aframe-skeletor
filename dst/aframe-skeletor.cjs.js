@@ -1,10 +1,6 @@
-import {
-	IK,
-	IKChain,
-	IKJoint,
-	IKBallConstraint,
-	IKHelper,
-} from 'three-skeletor'
+'use strict';
+
+var threeSkeletor = require('three-skeletor');
 
 AFRAME.registerComponent('skeletor', {
 	schema: {
@@ -43,53 +39,54 @@ AFRAME.registerComponent('skeletor', {
 		// TODO: no timeout,
 		// need to figure out how to wait for parent to be ready
 		setTimeout(() => {
-			this.ik = new IK()
-			this.chain = new IKChain()
+			this.ik = new threeSkeletor.IK();
+			this.chain = new threeSkeletor.IKChain();
 
-			let el = this.el
-			const path = [this.data.target, el]
+			let el = this.el;
+			const path = [this.data.target, el];
+
 			// we go up
-			while (!el.components.bone.data.root) {
-				el = el.parentNode
-				path.push(el)
+			while (!el.components.skeletor.data.root) {
+				el = el.parentNode;
+				path.push(el);
 			}
 
-			this.root = el.components.bone.root
+			this.root = el.components.skeletor.root;
 
-			let last_joint
+			let last_joint;
 			// we go down now
 			for (let i = path.length - 1; i >= 0; i--) {
-				el = path[i]
+				el = path[i];
 
-				const { ball, hinge } = el.components.bone
-					? el.components.bone.data
-					: {}
+				const { ball, hinge } = el.components.skeletor
+					? el.components.skeletor.data
+					: {};
 
-				const constraints = []
-				ball && constraints.push(new IKBallConstraint(ball))
-				hinge && constraints.push(new IKHingeConstraint(hinge))
-				last_joint = new IKJoint(el.object3D, {
+				const constraints = [];
+				ball && constraints.push(new threeSkeletor.IKBallConstraint(ball));
+				hinge && constraints.push(new IKHingeConstraint(hinge));
+				last_joint = new threeSkeletor.IKJoint(el.object3D, {
 					constraints,
-				})
+				});
 
 				this.chain.add(last_joint, {
 					target: i === 0 ? this.data.target.object3D : null,
-				})
+				});
 			}
 
-			this.ik.add(this.chain)
+			this.ik.add(this.chain);
 
 			if (this.data.debug) {
-				this.helper = new IKHelper(this.ik, {
+				this.helper = new threeSkeletor.IKHelper(this.ik, {
 					boneSize: 0.1,
 					axesSize: 0.1,
 					showBones: true,
 					showAxes: true,
-				})
+				});
 
-				this.el.sceneEl.object3D.add(this.helper)
+				this.el.sceneEl.object3D.add(this.helper);
 			}
-		}, 1000)
+		}, 1000);
 	},
 
 	tick() {
@@ -97,19 +94,19 @@ AFRAME.registerComponent('skeletor', {
 			return
 		}
 
-		this.ik.solve()
+		this.ik.solve();
 	},
 	remove() {
 		if (this.ik) {
-			this.el.object3D.remove(this.ik)
+			this.el.object3D.remove(this.ik);
 
 			if (this.data.debug) {
 				// TODO: better way of
 				setTimeout(() => {
-					this.el.sceneEl.object3D.remove(this.helper)
-					delete this.helper
-				}, 500)
+					this.el.sceneEl.object3D.remove(this.helper);
+					delete this.helper;
+				}, 500);
 			}
 		}
 	},
-})
+});
