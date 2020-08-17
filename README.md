@@ -10,6 +10,14 @@ Inverse Kinematics for aframe.io using [three-skeletor](https://github.com/agobl
 <img src="./docs/img/walking.gif"/>
 </p>
 
+# Install
+
+```
+npm install aframe-skeletor
+```
+
+or use one of the /dst/ builds
+
 # API
 
 ```js
