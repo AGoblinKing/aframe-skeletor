@@ -1,6 +1,6 @@
 {
 	"name": "aframe-skeletor",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "Inverse Kinematics for AFRAME",
 	"main": "dst/aframe-skeletor.cjs.js",
 	"module": "dst/aframe-skeletor.es.js",

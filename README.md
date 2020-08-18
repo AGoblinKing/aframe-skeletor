@@ -10,11 +10,11 @@ Inverse Kinematics for aframe.io using [three-skeletor](https://github.com/agobl
 <img src="./docs/img/walking.gif"/>
 </p>
 
-# **WARNING**
+## **WARNING**
 
 There is going to be some breaking API changes for bit until things settle down.
 
-# Install
+## Install
 
 ```
 npm install aframe-skeletor
@@ -22,7 +22,7 @@ npm install aframe-skeletor
 
 or use one of the /dst/ builds
 
-# API
+## API
 
 ```js
 	schema: {
@@ -57,7 +57,7 @@ or use one of the /dst/ builds
 	},
 ```
 
-# Quick Start
+## Quick Start
 
 ```html
 <html>
@@ -83,12 +83,12 @@ or use one of the /dst/ builds
 </html>
 ```
 
-# Usage
+## Usage
 
-## [goblin-life](https://goblin.life/legend)
+### [goblin-life](https://goblin.life/legend)
 
 Used for character IK in [goblin.life](https://goblin.life)!
 
-# Playlist
+## Playlist
 
 - [Spotify](https://open.spotify.com/playlist/1sy0OGu2TTXLTiZ7zMdcoB?si=R0hXnZI_RSetxiD9Axh8Pg)
