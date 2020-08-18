@@ -16,10 +16,14 @@ const config = {
 			file: pkg.module,
 		},
 	],
+
 	plugins: [
 		sucrase({
 			exclude: ['node_modules/**'],
 			transforms: ['typescript'],
+		}),
+		resolve({
+			extensions: ['.js', '.ts'],
 		}),
 	],
 }
@@ -52,4 +56,4 @@ const browser_config = {
 	],
 }
 
-export default [browser_config, config]
+export default [config, browser_config]

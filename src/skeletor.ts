@@ -3,6 +3,7 @@ import {
 	IKChain,
 	IKJoint,
 	IKBallConstraint,
+	IKHingeConstraint,
 	IKHelper,
 } from 'three-skeletor'
 
